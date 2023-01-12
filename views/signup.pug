@@ -1,0 +1,32 @@
+extends layout 
+
+block content 
+  h1= title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='firstName') First Name: 
+      input#firstName.form-control(type='text' name='firstName' placeholder='John')
+
+
+      label(for='lastName') Last Name: 
+      input#lastName.form-control(type='text' name='lastName' placeholder='Doe')
+
+      label(for='email') E-Mail Address: 
+      input#email.form-control(type='email' name='email' placeholder='johnDoe@email.com')
+
+      label(for='password') Password: 
+      input#password.form-control(type='password' name='password')
+
+      label(for='passwordConfirmation') Password Confirmation:
+      input#passwordConfirmation.form-control(type='password' name='passwordConfirmation')
+
+      hr
+
+      button.btn.btn-primary(type='submit') Sign Up
+
+      if errors
+        ul 
+          for error in errors 
+            li!= error.msg
+

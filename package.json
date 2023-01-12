@@ -1,0 +1,34 @@
+{
+  "name": "odin-members-only",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "nodemon ./bin/www",
+    "serverstart": "DEBUG=odin-members-only:* npm run devstart"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "core-js": "^3.27.1",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
+    "express": "~4.16.1",
+    "express-validator": "^6.14.2",
+    "http-errors": "~1.6.3",
+    "mongoose": "^6.8.3",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11"
+  },
+  "description": "A simple message board to practice user authentication",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tediferJones/odin-members-only.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tediferJones/odin-members-only/issues"
+  },
+  "homepage": "https://github.com/tediferJones/odin-members-only#readme"
+}
