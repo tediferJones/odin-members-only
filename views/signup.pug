@@ -6,17 +6,16 @@ block content
   form(method='POST' action='')
     div.form-group
       label(for='firstName') First Name: 
-      input#firstName.form-control(type='text' name='firstName' placeholder='John')
-
+      input#firstName.form-control(type='text' name='firstName' placeholder='John' value=(undefined===user ? '' : user.firstName))
 
       label(for='lastName') Last Name: 
-      input#lastName.form-control(type='text' name='lastName' placeholder='Doe')
+      input#lastName.form-control(type='text' name='lastName' placeholder='Doe' value=(undefined===user ? '' : user.lastName))
 
       label(for='email') E-Mail Address: 
-      input#email.form-control(type='email' name='email' placeholder='johnDoe@email.com')
+      input#email.form-control(type='email' name='email' placeholder='johnDoe@email.com' value=(undefined===user ? '' : user.email))
 
       label(for='password') Password: 
-      input#password.form-control(type='password' name='password')
+      input#password.form-control(type='password' name='password' value=(undefined===user ? '' : user.password))
 
       label(for='passwordConfirmation') Password Confirmation:
       input#passwordConfirmation.form-control(type='password' name='passwordConfirmation')

@@ -13,11 +13,12 @@ router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Login Page' })
 })
 
+// router.post('/login', userController.login_POST);
+
 router.get('/signup', function(req, res, next) {
   res.render('signup', { title: 'Signup Page' })
 })
 
-// TEST, probably gunna brick it
 router.post('/signup', userController.user_create_post);
 
 // consider adding route for '/status' which will show membership and admin status
