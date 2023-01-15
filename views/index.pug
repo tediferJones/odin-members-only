@@ -4,3 +4,12 @@ block content
   h1= title
   a(href='/login') Log In
   a(href='/signup') Sign Up
+
+  if currentUser 
+    a(href='/logout') Log Out
+
+  hr
+
+  a(href='/newpost') New Post
+
+  p #{currentUser}

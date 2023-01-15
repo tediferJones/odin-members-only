@@ -1,0 +1,20 @@
+extends layout 
+
+block content 
+  h1= title
+  h1= data
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='message') Message:
+      //- textarea does not have a value propety, so we read our data directly into the text area field
+      textarea(name="message", cols="50", rows="10") #{data}
+
+      hr
+
+      button(type='submit') Submit
+
+      if errors 
+        ul 
+          for error in errors
+            li!= error.msg

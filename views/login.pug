@@ -3,10 +3,10 @@ extends layout
 block content 
   h1= title
 
-  form(method='POST' action='')
+  form(method='POST' action='/login')
     div.form-group
-      label(for='email') E-Mail Address: 
-      input#email.form-control(type='email' name='email' placeholder='johnDoe@email.com')
+      label(for='username') E-Mail Address: 
+      input#email.form-control(type='email' name='username' placeholder='johnDoe@email.com')
 
       label(for='password') Password: 
       input#password.form-control(type='password' name='password')
@@ -19,3 +19,6 @@ block content
         ul 
           for errors in errors 
             li!= error.msg
+
+  a(href='/') HOME 
+  a(href='/signup') Signup
