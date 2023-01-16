@@ -5,10 +5,7 @@ const userController = require('../controllers/userController');
 const postController = require('../controllers/postController');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  // this page should show all posts
-  res.render('index', { title: 'Members Only' }); // , user: req.user });
-});
+router.get('/', postController.home_GET)
 
 router.get('/login', userController.login_GET);
 router.post('/login', userController.login_POST);
@@ -17,6 +14,11 @@ router.get('/signup', userController.signup_GET);
 router.post('/signup', userController.signup_POST);
 
 router.get('/logout', userController.logout_GET);
+
+router.get('/membership', userController.membership_GET);
+router.post('/membership', userController.membership_POST);
+
+router.get('/admin', userController.admin_GET);
 
 router.get('/newpost', postController.newPost_GET);
 router.post('/newpost', postController.newPost_POST);

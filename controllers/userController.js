@@ -23,8 +23,8 @@ exports.signup_POST = [
   (req, res, next) => {
     // check for errors
     const errors = validationResult(req);
-    if (!errors.isEmpty()) { // cant this just be 'if(errors)'?
-      // console.log(errors.array())
+    if (!errors.isEmpty()) {
+      // if errors exist, send back to sign-up page
       res.render('signup', { title: 'Signup Page', user: req.body, errors: errors.array() });
       return;
     } else {
@@ -72,3 +72,30 @@ exports.logout_GET = (req, res, next) => {
     res.redirect('/');
   });
 };
+
+exports.membership_GET = (req, res, next) => {
+  res.render('membership', { title: 'Current Membership Status' })
+}
+
+exports.membership_POST = [
+  // sanitize inputs
+  body('password').trim().escape(),
+  body('password').custom((value, { req }) => {
+    if (value !== 'SuperSecretPassword') {
+      throw new Error('Incorrect secret phrase')
+    }
+  }),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render('membership', { title: 'Current Membership Status', errors: errors.array() });
+      return;
+    }
+    // fetch user info and update membership status to true, then redirect
+  }
+]
+
+exports.admin_GET = (req, res, next) => {
+  res.render('admin', { title: 'Current Admin Status' })
+}

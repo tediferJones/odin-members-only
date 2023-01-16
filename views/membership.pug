@@ -1,0 +1,23 @@
+extends layout 
+
+block content 
+  h1= title
+
+  if currentUser 
+    h1 Member Status: #{currentUser.membershipStatus}
+    if (currentUser.membershipStatus)
+      a(href='/membership/revoke') REVOKE MEMBERSHIP
+    else 
+      form(method='POST' action='')
+        div.form-group
+          label(for='password') Secret Phrase: 
+          input(type='text', name='password')
+          button(type='submit') Get Membership Status
+          
+          if (errors)
+            ul 
+              for error in errors 
+                li!= error.msg
+  else 
+    h1 You need to be logged in to view this information 
+    a(href='/login') LOGIN

@@ -10,6 +10,22 @@ block content
 
   hr
 
+  for post in allPosts 
+    div(class='postCard')
+      p #{post.message}
+      div(class='postCardFooter')
+        if currentUser
+          p Posted by: #{post.author}
+        else
+          p Posted by: Anonymous
+        p Posted on: #{post.date} 
+        //- use functions like date.getYear() to format date as desired
+
+  hr
+
+  a(href='/membership') Membership Status 
+  a(href='/admin') Admin Status
+
   a(href='/newpost') New Post
 
   p #{currentUser}
