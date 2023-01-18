@@ -1,14 +1,22 @@
 const { body, validationResult } = require('express-validator');
 const Post = require('../models/post');
+// const he = require('he');
 
 exports.home_GET = (req, res, next) => {
   Post.find({}).exec(function (err, allPosts) {
     if (err) { return next(err); }
-    console.log(allPosts)
+    // write a unescape function to restore original values to text posts
+    // function unescape(str) {
+    //   const e = document.createElement('div');
+    //   e.innerHTML = str;
+    //   return e.innerText;
+    // }
+    for (let post of allPosts) {
+      // console.log(he.decode(post.message))
+      // post.message = he.decode(post.message);
+    }
     res.render('index', { title: 'Members Only', allPosts });
   });
-  // console.log(allPosts)
-  // res.render('index', { title: 'Members Only' });
 }
 
 exports.newPost_GET = (req, res, next) => {
@@ -37,3 +45,27 @@ exports.newPost_POST = [
     });
   }
 ]
+
+exports.post_GET = (req, res, next) => {
+  // get this post (use req.params._id to fetch id) and display
+
+  // find the post with the given ID, then get the email of the user that posted it
+  // get all posts with matching author and display
+  Post.findById(req.params.id, function(err, postData) {
+    if (err) { return next(err); }
+    // console.log(postData.author)
+    Post.find({ author: postData.author }, function(err, allPosts) {
+      if (err) { return next(err); }
+      // console.log(allPosts)
+      res.render('postDetail', { title: 'More posts by this author', allPosts })
+    })
+  })
+  // res.render('postDetail', { title: 'Other posts by this author' })
+}
+
+exports.postDelete_GET = (req, res, next) => {
+  Post.findByIdAndDelete(req.params.id, function(err, deletedPost) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  })
+}

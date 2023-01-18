@@ -6,11 +6,11 @@ block content
   if currentUser 
     h1 Member Status: #{currentUser.membershipStatus}
     if (currentUser.membershipStatus)
-      a(href='/membership/revoke') REVOKE MEMBERSHIP
+      a(href='/membership/revoke') REVOKE MEMBERSHIP STATUS
     else 
       form(method='POST' action='')
         div.form-group
-          label(for='password') Secret Phrase: 
+          label(for='password') Membership Password: 
           input(type='text', name='password')
           button(type='submit') Get Membership Status
           

@@ -2,3 +2,22 @@ extends layout
 
 block content 
   h1= title
+
+  if currentUser 
+    h1 Admin Status: #{currentUser.adminStatus}
+    if (currentUser.adminStatus)
+      a(href='/admin/revoke') REVOKE ADMIN STATUS
+    else 
+      form(method='POST' action='')
+        div.form-group
+          label(for='password') Admin Password:
+          input(type='text' name='password')
+          button(type='submit') Get Admin Status
+
+          if (errors)
+            ul 
+              for error in errors 
+                li!= error.msg
+  else 
+    h1 You need to be logged in to view this information 
+    a(href='/login') LOGIN

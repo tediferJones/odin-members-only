@@ -79,11 +79,11 @@ exports.membership_GET = (req, res, next) => {
 
 exports.membership_POST = [
   // sanitize inputs
-  body('password').trim().escape(),
-  body('password').custom((value, { req }) => {
+  body('password').trim().escape().custom((value, { req }) => {
     if (value !== 'SuperSecretPassword') {
-      throw new Error('Incorrect secret phrase')
+      throw new Error('Incorrect Password')
     }
+    return true;
   }),
 
   (req, res, next) => {
@@ -91,11 +91,58 @@ exports.membership_POST = [
     if (!errors.isEmpty()) {
       res.render('membership', { title: 'Current Membership Status', errors: errors.array() });
       return;
+    } else {
+      User.findByIdAndUpdate(req.user._id, { membershipStatus: true }, function(err, updatedUser) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      })
     }
-    // fetch user info and update membership status to true, then redirect
   }
 ]
 
+exports.membershipRevoke_GET = (req, res, next) => {
+  // if no user is logged in, redirect to home page
+  if (!req.user) { res.redirect('/'); }
+
+  User.findByIdAndUpdate(req.user._id, { membershipStatus: false }, function(err, updatedUser) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  })
+}
+
 exports.admin_GET = (req, res, next) => {
   res.render('admin', { title: 'Current Admin Status' })
+}
+
+exports.admin_POST = [
+  // sanitize inputs
+  body('password').trim().escape().custom((value, { req }) => {
+    if (value !== 'admin') {
+      throw new Error('Incorrect Password')
+    }
+    return true;
+  }),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render('admin', { title: 'Current Admin Status', errors: errors.array() });
+      return;
+    } else {
+      User.findByIdAndUpdate(req.user._id, { adminStatus: true }, function(err, updatedUser) {
+        if (err) { return next(err); }
+        res.redirect('/')
+      })
+    }
+  }
+]
+
+exports.adminRevoke_GET = (req, res, next) => {
+  // if no user is logged in, redirect to homepage
+  if (!req.user) { res.redirect('/'); }
+  
+  User.findByIdAndUpdate(req.user._id, { adminStatus: false }, function(err, updatedUser) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  })
 }

@@ -1,15 +1,7 @@
-extends layout
+extends layout 
 
-block content
+block content 
   h1= title
-  a(href='/login') Log In
-  a(href='/signup') Sign Up
-
-  if currentUser 
-    a(href='/logout') Log Out
-
-  hr
-
   for post in allPosts 
     div(class='postCard')
       //- p #{post.message}
@@ -23,19 +15,7 @@ block content
           p Posted on: #{post.date}
         //- use functions like date.getYear() to format date as desired
         else
-          //- p Posted by: REDACTED
-          p Posted by: 
-            a(href=post.url) REDACTED
+          p Posted by: REDACTED
           p Posted on: REDACTED
         if currentUser && currentUser.adminStatus 
           a(href=post.url + '/delete') DELETE
-
-  hr
-
-  a(href='/membership') Membership Status 
-  a(href='/admin') Admin Status
-
-  if currentUser
-    a(href='/newpost') New Post
-
-  p #{currentUser}
