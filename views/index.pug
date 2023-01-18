@@ -1,41 +1,46 @@
 extends layout
 
 block content
-  h1= title
-  a(href='/login') Log In
-  a(href='/signup') Sign Up
+  div(class='header')
+    h1(class='headerChild')= title
 
-  if currentUser 
-    a(href='/logout') Log Out
+    if currentUser 
+      div(class='headerChild')
+        a(href='/logout') Log Out
+
+    div(class='headerChild')
+      a(href='/login') Log In
+      a(href='/signup') Sign Up
 
   hr
 
-  for post in allPosts 
-    div(class='postCard')
-      //- p #{post.message}
-      p!=post.message
-      div(class='postCardFooter')
-        if currentUser && currentUser.membershipStatus
-          //- make this a link that leads to page containing all posts made by this user
-          //- p Posted by: #{post.author}
-          p Posted by: 
-            a(href=post.url) #{post.author}
-          p Posted on: #{post.date}
-        //- use functions like date.getYear() to format date as desired
-        else
-          //- p Posted by: REDACTED
-          p Posted by: 
-            a(href=post.url) REDACTED
-          p Posted on: REDACTED
+  div(class='content')
+    for post in allPosts 
+      div(class='postCard')
+        //- p #{post.message}
+        //- p!=post.message
+        div(class='messageContent')!=post.message
+        div(class='postCardFooter')
+          if currentUser && currentUser.membershipStatus
+            //- make this a link that leads to page containing all posts made by this user
+            p Posted by: 
+              a(href=post.url) #{post.author}
+            p Posted on: #{post.date}
+          else
+            p Posted by: 
+              a(href=post.url) REDACTED
+            p Posted on: REDACTED
         if currentUser && currentUser.adminStatus 
-          a(href=post.url + '/delete') DELETE
+          a(href=post.url + '/delete' class='delete') DELETE
 
-  hr
+  //- hr
 
-  a(href='/membership') Membership Status 
-  a(href='/admin') Admin Status
+  div(class='status')
+    a(href='/membership') Membership Status 
+    a(href='/admin') Admin Status
 
   if currentUser
-    a(href='/newpost') New Post
+    div(class='newPost')
+      a(href='/newpost') New Post
 
-  p #{currentUser}
+  //- p #{currentUser}

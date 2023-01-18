@@ -28,7 +28,6 @@ app.set('view engine', 'pug');
 // user authentication setup
 passport.use(
   new LocalStrategy((email, password, done) => {
-    // console.log(`EMAIL: ${email}, PASSWORD: ${password}`);
     User.findOne({ email: email}, (err, user) => {
       if (err) { return done(err); }
       if (!user) {

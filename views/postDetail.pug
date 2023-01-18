@@ -5,15 +5,14 @@ block content
   for post in allPosts 
     div(class='postCard')
       //- p #{post.message}
-      p!=post.message
+      //- p!=post.message
+      div(class='messageContent')!=post.message
       div(class='postCardFooter')
         if currentUser && currentUser.membershipStatus
           //- make this a link that leads to page containing all posts made by this user
-          //- p Posted by: #{post.author}
           p Posted by: 
             a(href=post.url) #{post.author}
           p Posted on: #{post.date}
-        //- use functions like date.getYear() to format date as desired
         else
           p Posted by: REDACTED
           p Posted on: REDACTED
