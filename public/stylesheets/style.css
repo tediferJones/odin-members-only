@@ -7,13 +7,34 @@ a {
   color: #00B7FF;
 } */
 
+:root {
+  --primary-color: #3484f0;
+  --secondary-color: #C4DBFA;
+  --background-color: #757575;
+  --off-white: #f7f7f7;
+}
+
 body {
   font-family: monospace;
   font-size: large;
   margin: 0;
+  background-color: var(--background-color);
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.whiteText {
+  color: var(--off-white)
 }
 
 .header {
+  background-color: var(--primary-color);
+  color: var(--off-white);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,6 +42,7 @@ body {
 
 .headerChild {
   width: 33%;
+  color: var(--off-white);
 
   display: flex;
   align-items: center;
@@ -35,7 +57,11 @@ body {
 }
 
 .postCard {
+  margin: 2%;
+  padding: 5%;
+  background-color: var(--off-white);
   width: 50%;
+  border-radius: 16px;
 
   display: flex;
   flex-direction: column;
@@ -52,13 +78,22 @@ body {
 }
 
 .delete {
+  background-color: var(--primary-color);
+  padding: 2%;
+  font-weight: bolder;
+
   display: flex;
   justify-content: center;
 }
 
 .newPost,
 .status {
-  padding: 2.5%;
+  background-color: var(--primary-color);
+  color: var(--off-white);
+  border-radius: 16px;
+
+  margin: 2%;
+  padding: 2%;
   position: fixed;
   bottom: 0;
 }
@@ -69,4 +104,53 @@ body {
 
 .status {
   left: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* FORMS */
+
+.formContainer {
+  background-color: var(--off-white);
+  margin: 15%;
+  padding: 5%;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.formInput {
+  margin: 5% 0;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  cursor: pointer;
+  width: 100%;
+  padding: 5%;
+  background-color: var(--primary-color);
+  color: var(--off-white);
+  font-size: 1.5em;
+  font-weight: bolder;
+  border: 0;
+}
+
+.link {
+  background-color: var(--primary-color);
+  color: var(--off-white);
+  display: flex;
+
+  width: 100%;
+  font-size: 1.5em;
+  font-weight: bolder;
+
+  justify-content: center;
+  align-items: center;
+  padding: 2%;
 }

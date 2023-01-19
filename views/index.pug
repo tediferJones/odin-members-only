@@ -1,24 +1,10 @@
 extends layout
 
 block content
-  div(class='header')
-    h1(class='headerChild')= title
-
-    if currentUser 
-      div(class='headerChild')
-        a(href='/logout') Log Out
-
-    div(class='headerChild')
-      a(href='/login') Log In
-      a(href='/signup') Sign Up
-
-  hr
 
   div(class='content')
     for post in allPosts 
       div(class='postCard')
-        //- p #{post.message}
-        //- p!=post.message
         div(class='messageContent')!=post.message
         div(class='postCardFooter')
           if currentUser && currentUser.membershipStatus
@@ -31,11 +17,10 @@ block content
               a(href=post.url) REDACTED
             p Posted on: REDACTED
         if currentUser && currentUser.adminStatus 
-          a(href=post.url + '/delete' class='delete') DELETE
-
-  //- hr
+          a(href=post.url + '/delete' class='delete whiteText') DELETE POST
 
   div(class='status')
+    //- ADD INDICATORS (RED/GREEN LIGHT) TO INDICATE STATUSES
     a(href='/membership') Membership Status 
     a(href='/admin') Admin Status
 

@@ -1,23 +1,29 @@
 extends layout 
 
 block content 
-  h1= title
+  div(class='formContainer')
+    h1= title
 
-  if currentUser 
-    h1 Member Status: #{currentUser.membershipStatus}
-    if (currentUser.membershipStatus)
-      a(href='/membership/revoke') REVOKE MEMBERSHIP STATUS
+    if currentUser 
+      //- dont just display true or false, if true display 'active', if false display 'disabled'
+      h2 Member Status: #{currentUser.membershipStatus}
+      if (currentUser.membershipStatus)
+        a(href='/membership/revoke' class='link') REVOKE MEMBERSHIP STATUS
+      else 
+        form(method='POST' action='')
+          div.form-group
+            div(class='formInput')
+              label(for='password') Membership Password: 
+              input(type='text', name='password')
+
+            hr
+
+            button(type='submit') Get Membership Status
+            
+            if (errors)
+              ul 
+                for error in errors 
+                  li!= error.msg
     else 
-      form(method='POST' action='')
-        div.form-group
-          label(for='password') Membership Password: 
-          input(type='text', name='password')
-          button(type='submit') Get Membership Status
-          
-          if (errors)
-            ul 
-              for error in errors 
-                li!= error.msg
-  else 
-    h1 You need to be logged in to view this information 
-    a(href='/login') LOGIN
+      h1 You must be logged in to access this information 
+      a(href='/login' class='link') LOGIN

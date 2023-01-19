@@ -1,34 +1,37 @@
 extends layout 
 
-block content 
-  h1= title
+block content
+  div(class='formContainer')
 
-  form(method='POST' action='')
-    div.form-group
-      label(for='firstName') First Name: 
-      input#firstName.form-control(type='text' name='firstName' placeholder='John' value=(undefined===user ? '' : user.firstName))
+    h1= title
 
-      label(for='lastName') Last Name: 
-      input#lastName.form-control(type='text' name='lastName' placeholder='Doe' value=(undefined===user ? '' : user.lastName))
+    form(method='POST' action='')
+      div.form-group
+        div(class='formInput')
+          label(for='firstName') First Name: 
+          input#firstName.form-control(type='text' name='firstName' placeholder='John' value=(undefined===user ? '' : user.firstName))
 
-      label(for='email') E-Mail Address: 
-      input#email.form-control(type='email' name='email' placeholder='johnDoe@email.com' value=(undefined===user ? '' : user.email))
+        div(class='formInput')
+          label(for='lastName') Last Name: 
+          input#lastName.form-control(type='text' name='lastName' placeholder='Doe' value=(undefined===user ? '' : user.lastName))
 
-      label(for='password') Password: 
-      input#password.form-control(type='password' name='password' value=(undefined===user ? '' : user.password))
+        div(class='formInput')
+          label(for='email') E-Mail Address: 
+          input#email.form-control(type='email' name='email' placeholder='johnDoe@email.com' value=(undefined===user ? '' : user.email))
 
-      label(for='passwordConfirmation') Password Confirmation:
-      input#passwordConfirmation.form-control(type='password' name='passwordConfirmation')
+        div(class='formInput')
+          label(for='password') Password: 
+          input#password.form-control(type='password' name='password' value=(undefined===user ? '' : user.password))
+        
+        div(class='formInput')
+          label(for='passwordConfirmation') Password Confirmation:
+          input#passwordConfirmation.form-control(type='password' name='passwordConfirmation')
 
-      hr
+        hr
 
-      button.btn.btn-primary(type='submit') Sign Up
+        button.btn.btn-primary(type='submit') Sign Up
 
-      if errors
-        ul 
-          for error in errors 
-            li!= error.msg
-
-  a(href='/') HOME 
-  a(href='/login') Login
-
+        if errors
+          ul 
+            for error in errors 
+              li!= error.msg

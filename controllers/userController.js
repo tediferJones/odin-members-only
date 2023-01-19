@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
 exports.signup_GET = (req, res, next) => {
-  res.render('signup', { title: 'Signup Page' })
+  res.render('signup', { title: 'Signup Now!' })
 }
 
 exports.signup_POST = [

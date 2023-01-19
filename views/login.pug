@@ -1,24 +1,29 @@
 extends layout 
 
 block content 
-  h1= title
+  div(class='formContainer')
 
-  form(method='POST' action='/login')
-    div.form-group
-      label(for='username') E-Mail Address: 
-      input#email.form-control(type='email' name='username' placeholder='johnDoe@email.com')
+    h1= title
 
-      label(for='password') Password: 
-      input#password.form-control(type='password' name='password')
+    form(method='POST' action='/login')
+      div.form-group
+        div(class='formInput')
+          label(for='username') E-Mail Address: 
+          input#email.form-control(type='email' name='username' placeholder='johnDoe@email.com')
 
-      hr
+        div(class='formInput')
+          label(for='password') Password: 
+          input#password.form-control(type='password' name='password')
 
-      button.btn.btn-primary(type='submit') Log In
+        hr
 
-      if errors 
-        ul 
-          for errors in errors 
-            li!= error.msg
+        //- replace this with a simple button, idk what all those dots are doing
+        button.btn.btn-primary(type='submit') Log In
 
-  a(href='/') HOME 
-  a(href='/signup') Signup
+        if errors 
+          ul 
+            for errors in errors 
+              li!= error.msg
+
+  //- a(href='/') HOME 
+  //- a(href='/signup') Signup

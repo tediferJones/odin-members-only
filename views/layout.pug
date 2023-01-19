@@ -5,4 +5,16 @@ html
     link(rel='icon' href='#')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    block header 
+      div(class='header')
+        h1(class='headerChild')
+          a(href='/') Members Only
+
+        if currentUser 
+          div(class='headerChild')
+            a(href='/logout') Log Out
+        //- this so that login/signup only show when no user is logged in, and if a user is logged in, should only show logout
+        div(class='headerChild')
+          a(href='/login') Log In
+          a(href='/signup') Sign Up
     block content

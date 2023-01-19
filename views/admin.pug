@@ -1,23 +1,29 @@
 extends layout 
 
-block content 
-  h1= title
+block content
+  div(class='formContainer')
+    h1= title
 
-  if currentUser 
-    h1 Admin Status: #{currentUser.adminStatus}
-    if (currentUser.adminStatus)
-      a(href='/admin/revoke') REVOKE ADMIN STATUS
+    if currentUser 
+      //- dont just display true or false, if true display 'active', if false display 'disabled'
+      h2 Admin Status: #{currentUser.adminStatus}
+      if (currentUser.adminStatus)
+        a(href='/admin/revoke' class='link') REVOKE ADMIN STATUS
+      else 
+        form(method='POST' action='')
+          div.form-group
+            div(class='formInput')
+              label(for='password') Admin Password:
+              input(type='text' name='password')
+
+            hr
+
+            button(type='submit') Get Admin Status
+
+            if (errors)
+              ul 
+                for error in errors 
+                  li!= error.msg
     else 
-      form(method='POST' action='')
-        div.form-group
-          label(for='password') Admin Password:
-          input(type='text' name='password')
-          button(type='submit') Get Admin Status
-
-          if (errors)
-            ul 
-              for error in errors 
-                li!= error.msg
-  else 
-    h1 You need to be logged in to view this information 
-    a(href='/login') LOGIN
+      h1 You must be logged in to access this information 
+      a(href='/login' class='link') LOGIN
