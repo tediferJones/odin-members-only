@@ -1,20 +1,35 @@
 extends layout 
 
 block content 
-  h1= title
-  for post in allPosts 
+  div(class='content')
     div(class='postCard')
-      //- p #{post.message}
-      //- p!=post.message
       div(class='messageContent')!=post.message
       div(class='postCardFooter')
         if currentUser && currentUser.membershipStatus
-          //- make this a link that leads to page containing all posts made by this user
           p Posted by: 
-            a(href=post.url) #{post.author}
+            a(href=post.authorURL) #{post.author}
           p Posted on: #{post.date}
         else
-          p Posted by: REDACTED
+          p Posted by: 
+            a(href=post.authorURL) REDACTED
           p Posted on: REDACTED
-        if currentUser && currentUser.adminStatus 
-          a(href=post.url + '/delete') DELETE
+      if currentUser && currentUser.adminStatus 
+        a(href=post.url + '/delete' class='delete whiteText') DELETE POST
+
+  div(class='status')
+    div(class='formInput')
+      a(href='/membership') Member Status:
+      if currentUser && currentUser.membershipStatus
+        div(class='indicator active')
+      else 
+        div(class='indicator disabled')
+    div(class='formInput')
+      a(href='/admin') Admin Status: 
+      if currentUser && currentUser.adminStatus 
+        div(class='indicator active')
+      else 
+        div(class='indicator disabled')
+
+  if currentUser
+    div(class='newPost')
+      a(href='/newpost') New Post

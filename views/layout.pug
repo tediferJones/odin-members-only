@@ -12,9 +12,10 @@ html
 
         if currentUser 
           div(class='headerChild')
+            a(href='/user') User Info
             a(href='/logout') Log Out
-        //- this so that login/signup only show when no user is logged in, and if a user is logged in, should only show logout
-        div(class='headerChild')
-          a(href='/login') Log In
-          a(href='/signup') Sign Up
+        else 
+          div(class='headerChild')
+            a(href='/login') Log In
+            a(href='/signup') Sign Up
     block content

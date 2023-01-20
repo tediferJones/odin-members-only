@@ -5,7 +5,7 @@ block content
 
     h1= title
 
-    form(method='POST' action='/login')
+    form(method='POST' action='')
       div.form-group
         div(class='formInput')
           label(for='username') E-Mail Address: 
@@ -17,13 +17,9 @@ block content
 
         hr
 
-        //- replace this with a simple button, idk what all those dots are doing
-        button.btn.btn-primary(type='submit') Log In
+        button(type='submit') Log In
 
         if errors 
           ul 
             for errors in errors 
               li!= error.msg
-
-  //- a(href='/') HOME 
-  //- a(href='/signup') Signup

@@ -5,8 +5,13 @@ block content
     h1= title
 
     if currentUser 
-      //- dont just display true or false, if true display 'active', if false display 'disabled'
-      h2 Member Status: #{currentUser.membershipStatus}
+      div(class='displayStatus')
+        h2 Member Status: 
+        if currentUser.membershipStatus
+          h2(class='active') ACTIVE
+        else 
+          h2(class='disabled') DISABLED
+
       if (currentUser.membershipStatus)
         a(href='/membership/revoke' class='link') REVOKE MEMBERSHIP STATUS
       else 

@@ -1,23 +1,25 @@
 extends layout 
 
-block content 
-  h1= title
+block content
+  div(class='formContainer')
+    h1= title
 
-  if currentUser
-    form(method='POST' action='')
-      div.form-group
-        label(for='message') Message (limited to 500 characters):
-        //- textarea does not have a value propety, so we read our data directly into the text area field like so:
-        textarea(name="message", cols="50", rows="10") #{data}
+    if currentUser
+      form(method='POST' action='')
+        div.form-group
+          div(class='messageInput')
+            label(for='message') Message (limited to 500 characters):
+            //- textarea does not have a value propety, so we read our data directly into the text area field like so:
+            textarea(name="message", cols="50", rows="10") #{data}
 
-        hr
+          hr
 
-        button(type='submit') Submit
+          button(type='submit') Submit
 
-        if errors 
-          ul 
-            for error in errors
-              li!= error.msg
-  else 
-    h1 You need to login to make a new post
-    a(href='/login') LOGIN
+          if errors 
+            ul 
+              for error in errors
+                li!= error.msg
+    else
+      h1 You must login to make a new post
+      a(href='/login' class='link') LOGIN

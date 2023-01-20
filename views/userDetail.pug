@@ -1,0 +1,25 @@
+extends layout 
+
+block content
+  div(class='formContainer')
+    if currentUser
+      h1= currentUser.url
+      div(class='postCard')
+        h3 Name: #{currentUser.firstName} #{currentUser.lastName}
+        h3 E-Mail: #{currentUser.email}
+        div(class='displayStatus')
+          h3 Member Status:
+          if currentUser.membershipStatus 
+            h3(class='active') ACTIVE 
+          else 
+            h3(class='disabled') DISABLED
+        div(class='displayStatus')
+          h3 Admin Status:
+          if currentUser.adminStatus 
+            h3(class='active') ACTIVE 
+          else 
+            h3(class='disabled') DISABLED
+    
+    else
+      h1 You must login to view this information
+      a(href='/login' class='link') LOGIN

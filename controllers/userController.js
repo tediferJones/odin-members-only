@@ -146,3 +146,7 @@ exports.adminRevoke_GET = (req, res, next) => {
     res.redirect('/');
   })
 }
+
+exports.userDetails_GET = (req, res, next) => {
+  res.render('userDetail', { title: 'User Info' })
+}

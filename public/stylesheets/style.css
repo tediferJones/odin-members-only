@@ -128,6 +128,8 @@ a {
 
   display: flex;
   justify-content: space-between;
+  /* NEW CHANGE */
+  align-items: center;
 }
 
 button {
@@ -153,4 +155,36 @@ button {
   justify-content: center;
   align-items: center;
   padding: 2%;
+}
+
+.messageInput {
+  display: flex;
+  flex-direction: column;
+}
+
+.displayStatus {
+  margin: 5% 0;
+  display: flex;
+}
+
+.active {
+  color: #84F034;
+}
+
+.disabled {
+  color: #F03484;
+}
+
+.indicator {
+  height: 1em;
+  width: 1em;
+  border-radius: 0.5em;
+}
+
+.indicator.active {
+  background-color: #84F034;
+}
+
+.indicator.disabled {
+  background-color: #F03484;
 }

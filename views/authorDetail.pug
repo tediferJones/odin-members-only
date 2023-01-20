@@ -1,7 +1,6 @@
-extends layout
+extends layout 
 
 block content
-
   div(class='content')
     for post in allPosts 
       div(class='postCard')
@@ -36,4 +35,3 @@ block content
     div(class='newPost')
       a(href='/newpost') New Post
 
-  //- p #{currentUser}

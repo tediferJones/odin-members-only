@@ -1,5 +1,6 @@
 const { body, validationResult } = require('express-validator');
 const Post = require('../models/post');
+const User = require('../models/user');
 
 function reverseOrder(arr) {
   const reversedArr = [];
@@ -33,7 +34,8 @@ exports.newPost_POST = [
     new Post({
       message: req.body.message,
       author: req.user.email,
-      date: new Date().toDateString() + ' at ' + new Date().toLocaleTimeString()
+      date: new Date().toDateString() + ' at ' + new Date().toLocaleTimeString(),
+      authorURL: req.user.url
     }).save((err) => {
       if (err) { return next(err); }
       res.redirect('/');
@@ -41,15 +43,10 @@ exports.newPost_POST = [
   }
 ]
 
-exports.post_GET = (req, res, next) => {
-  // rename this function and route, doesnt make sense
-  // fix url, current URL comes from post ID, should be user ID
-  Post.findById(req.params.id, function(err, postData) {
+exports.postDetail_GET = (req, res, next) => {
+  Post.findById(req.params.id, function(err, post) {
     if (err) { return next(err); }
-    Post.find({ author: postData.author }, function(err, allPosts) {
-      if (err) { return next(err); }
-      res.render('postDetail', { title: 'More posts by this author', allPosts: reverseOrder(allPosts) })
-    })
+    res.render('postDetail', { title: 'Post Details', post })
   })
 }
 
@@ -57,5 +54,15 @@ exports.postDelete_GET = (req, res, next) => {
   Post.findByIdAndDelete(req.params.id, function(err, deletedPost) {
     if (err) { return next(err); }
     res.redirect('/');
+  })
+}
+
+exports.authorDetail_GET = (req, res, next) => {
+  User.findById(req.params.id, function(err, userInfo) {
+    if (err) { return next(err); }
+    Post.find({ author: userInfo.email }, function(err, allPosts) {
+      if (err) { return next(err); }
+      res.render('authorDetail', { title: 'More Posts by this author', allPosts: reverseOrder(allPosts) })
+    })
   })
 }
