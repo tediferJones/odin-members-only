@@ -7,6 +7,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
+
+const compression = require('compression');
+const helmet = require('helmet');
+
 const User = require('./models/user');
 
 var indexRouter = require('./routes/index');
@@ -20,6 +24,8 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB Connection Error: '));
 
 var app = express();
+
+app.use(helmet());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -61,6 +67,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {

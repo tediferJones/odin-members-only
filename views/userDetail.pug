@@ -3,7 +3,7 @@ extends layout
 block content
   div(class='formContainer')
     if currentUser
-      h1= currentUser.url
+      //- h1= currentUser.url
       div(class='postCard')
         h3 Name: #{currentUser.firstName} #{currentUser.lastName}
         h3 E-Mail: #{currentUser.email}
